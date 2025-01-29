@@ -1,6 +1,6 @@
 # smart_clean_admin
 
-A new Flutter project.
+Smart-clean project 
 
 ## Getting Started
 
