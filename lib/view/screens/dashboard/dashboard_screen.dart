@@ -23,6 +23,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
     return GetBuilder<DashboardController>(builder: (ctrl) {
       return Scaffold(
           appBar: AppBar(
@@ -76,7 +78,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 width: 30,
                 colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn), // Change color
               ),
-              Icon(Icons.message, size: 30, color: Colors.white), // Message Icon
+              Icon(Icons.person, size: 30, color: Colors.white), // Message Icon
               Icon(Icons.settings, size: 30, color: Colors.white), // Settings Icon
             ],
             onTap: (index) {
