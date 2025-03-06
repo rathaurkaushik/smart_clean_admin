@@ -56,8 +56,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
             index: ctrl.tabIndex,
             children: [
               HomeScreen(),
-              ProfileScreen(),
+
               RequestScreen(),
+              ProfileScreen(),
               SettingScreen(),
             ],
           )),
@@ -66,20 +67,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
             backgroundColor: Colors.white, // Scaffold background color
             color: Colors.green, // Navigation bar color
             buttonBackgroundColor: Colors.green, // Active item background color
-            height: 70, // Navigation bar height
+            height: 60, // Navigation bar height
             index: ctrl.tabIndex, // Current selected index
             animationCurve: Curves.easeIn, // Animation effect
             animationDuration: Duration(milliseconds: 300), // Animation speed
             items: [
-              Icon(Icons.home, size: 30, color: Colors.white), // Home Icon
+              Icon(Icons.home, size: 25, color: Colors.white), // Home Icon
               SvgPicture.asset(
                 'assets/icons/request_icon.svg',
-                height: 30, // Adjust size
-                width: 30,
+                height: 25, // Adjust size
+                width: 25,
                 colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn), // Change color
               ),
-              Icon(Icons.person, size: 30, color: Colors.white), // Message Icon
-              Icon(Icons.settings, size: 30, color: Colors.white), // Settings Icon
+              Icon(Icons.person, size: 25, color: Colors.white), // Message Icon
+              Icon(Icons.settings, size: 25, color: Colors.white), // Settings Icon
             ],
             onTap: (index) {
               ctrl.changeTabIndex(index); // Change tab index using controller
