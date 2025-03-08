@@ -1,7 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_clean_admin/firebase_opt.dart';
+import 'package:smart_clean_admin/view/screens/auth/auth_binding.dart';
+import 'package:smart_clean_admin/view/screens/auth/auth_controller.dart';
+import 'package:smart_clean_admin/view/screens/auth/login_screen.dart';
+import 'package:smart_clean_admin/view/screens/auth/signup_screen.dart';
 import 'package:smart_clean_admin/view/screens/dashboard/dashboard_binding.dart';
 import 'package:smart_clean_admin/view/screens/dashboard/dashboard_screen.dart';
 import 'package:smart_clean_admin/view/screens/home/home_controller.dart';
@@ -23,6 +28,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final isLogggedIn = FirebaseAuth.instance.currentUser != null;
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
@@ -31,13 +37,24 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      initialRoute: "/",
+      initialRoute: isLogggedIn ? "/" : "/signup",
       initialBinding: DashboardBinding(),
       getPages: [
+
         GetPage(
           name: "/",
           page: () => DashboardScreen(),
           binding: DashboardBinding()
+        ),
+        GetPage(
+            name: "/login",
+            page: () => LoginScreen(),
+        ),
+        GetPage(
+            name: "/signup",
+            page: () => SignupScreen(),
+          binding: AuthBinding(),
+
         ),
         GetPage(
           name: "/home",

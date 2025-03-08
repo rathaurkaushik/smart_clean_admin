@@ -1,214 +1,141 @@
-
- import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:smart_clean_admin/view/widgets/custom_widgets.dart';
 import '../../../constants/app_color.dart';
 
 class ProfileScreen extends StatelessWidget {
-   const ProfileScreen({super.key});
+  const ProfileScreen({super.key});
 
-   @override
-   Widget build(BuildContext context) {
-     double screenWidth = MediaQuery.of(context).size.width;
-     double screenHeight = MediaQuery.of(context).size.height;
+  @override
+  Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
 
-     return Scaffold(
-       body: SingleChildScrollView(
-         child: SafeArea(
-           child: Column(
-             children: [
-               Container(
-                 color: Colors.blue,
-                 width: screenWidth,
-                 // height: screenHeight * 0.30,
-                 child: Column(
-                   children: [
-                     CircleAvatar(
-                       radius: 50,
-                       backgroundColor: Colors.white,
-                       child: Image(image: AssetImage('assets/images/man.png'))),
-                     SizedBox(height: 1,),
-                     Text('David Wilson',
-                         style: TextStyle(
-                         color: AppColor.appWhiteColor,
-                         fontSize: 16,
-                         fontWeight: FontWeight.w500)
-                     ),
-                     Text('Cleanup Provider',
-                         style: TextStyle(
-                         color: AppColor.appWhiteColor,
-                         fontSize: 13,
-                         )
-                     ),
-                     SizedBox(
-                       width: screenWidth * 0.95,
-                       child: Card(
-                         elevation: 2,
-                         color: Colors.white,
-                         child: Padding(
-                           padding: const EdgeInsets.all(11.0),
-                           child: Row(
-                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                             crossAxisAlignment: CrossAxisAlignment.center,
-                             children: [
-                               Column(children: [
-                                 Text('156', style: TextStyle(fontSize: 18, color: Colors.blue,)),
-                                 Text('Completed',style: TextStyle(fontSize: 11,color: AppColor.grayTextColor),)
-                               ]),
-                               Column(children: [
-                                 Text('4.9', style: TextStyle(fontSize: 18, color: Colors.blue,)),
-                                 Text('Rating',style: TextStyle(fontSize: 11,color: AppColor.grayTextColor),)
-                               ],),
-                               Column(children: [
-                                 Text('98%', style: TextStyle(fontSize: 18, color: Colors.blue,)),
-                                 Text('Success',style: TextStyle(fontSize: 11,color: AppColor.grayTextColor),)
-                               ],)
-                             ],
-                           ),
-                         ),
-                       ),
-                     ),
-                   ],
-                 ),
-               ),
-               SizedBox(height: 5),
-               SizedBox(
-                 width: screenWidth * 0.95,
-                 child: Card(
-                   elevation: 2,
-                   color: Colors.white,
-                   child: Padding(
-                     padding: const EdgeInsets.all(11.0),
-                     child: Column(
-                       crossAxisAlignment: CrossAxisAlignment.start,
-                       children: [
-                         Text('Personal Information',style: TextStyle(fontSize: 15,),),
-                         SizedBox(height: 11),
-                         Row(
-                           children: [
-                             Icon(Icons.email_outlined,size: 16,),
-                             RichText(text: TextSpan(children: [
-                               TextSpan(text: 'Email\n',style: TextStyle(color: AppColor.grayTextColor,fontSize: 11)),
-                               TextSpan(text: 'david.wolson@example.com',style: TextStyle(fontSize: 12)),
-                             ])),
-                           ],
-                         ),
-                         SizedBox(height: 8),
-                         Row(
-                           children: [
-                             Icon(CupertinoIcons.phone,size: 16,),
-                             RichText(text: TextSpan(children: [
-                               TextSpan(text: 'Phone\n',style: TextStyle(color: AppColor.grayTextColor,fontSize: 11)),
-                               TextSpan(text: '+1 234 459 580',style: TextStyle(fontSize: 12)),
-                             ])),
-                           ],
-                         ),
-                         SizedBox(height: 8),
-                         Row(
-                           children: [
-                             Icon(Icons.location_on_outlined,size: 16,),
-                             RichText(text: TextSpan(children: [
-                               TextSpan(text: 'Location\n',style: TextStyle(color: AppColor.grayTextColor,fontSize: 11)),
-                               TextSpan(text: 'New York, USA',style: TextStyle(fontSize: 12)),
-                             ])),
-                           ],
-                         )
-                       ],
-                     ),
-                   ),
-                 ),
-               ),
-               SizedBox(height: 5),
-               SizedBox(
-                 width: screenWidth * .95,
-                 child: Card(
-                   elevation: 2,
-                   color: Colors.white,
-                   child: Padding(
-                     padding: const EdgeInsets.all(11.0),
-                     child: Column(
-                       crossAxisAlignment: CrossAxisAlignment.start,
-                       children: [
-                         Text('Performance',style: TextStyle(fontSize: 15),),
-                         SizedBox(height: 11),
-                         Row(
-                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                             children: [
-                               Text('Response Rate',style: TextStyle(fontSize: 13)),
-                               Text('98%',style: TextStyle(fontSize: 13)),
-                             ]
-                         ),
-                         SizedBox(height: 4),
-                         SizedBox(
-                           height: 6,
-                           child: LinearProgressIndicator(
-                             borderRadius: BorderRadius.circular(12),
-                             value: 0.98,
-                             backgroundColor: Colors.grey[300],
-                             valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
-                           ),
-                         ),
-                         SizedBox(height: 4),
-                         Row(
-                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                           children: [
-                             Text('Completion Rate',style: TextStyle(fontSize: 13)),
-                             Text('95%',style: TextStyle(fontSize: 13))
-                           ],
-                         ),
-                         SizedBox(height: 4),
-                         SizedBox(height: 6,
-                           child: LinearProgressIndicator(
-                             borderRadius: BorderRadius.circular(12),
-                             value: 0.95,
-                             backgroundColor: Colors.grey[300],
-                             valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-                           ),
-                         )
-                       ],
-                     ),
-                   ),
-                 ),
-               ),
-               SizedBox(height: 5),
-               SizedBox(
-                 width: screenWidth * 0.95,
-                 child: Card(
-                   elevation: 1,
-                   color: Colors.white38,
-                   child: Padding(
-                     padding: const EdgeInsets.all(8),
-                     child: Row(
-                       mainAxisAlignment: MainAxisAlignment.center,
-                       children: [
-                         Icon(CupertinoIcons.delete),
-                         Text('Reset Account'),
-                       ],
-                     ),
-                   ),
-                 ),
-               ),
-               SizedBox(
-                 width: screenWidth * 0.95,
-                 child: Card(
-                   elevation: 1,
-                   color: Colors.red,
-                   child: Padding(
-                     padding: const EdgeInsets.all(8),
-                     child: Row(
-                       mainAxisAlignment: MainAxisAlignment.center,
-                       children: [
-                         Icon(Icons.logout,color: Colors.white,),
-                         Text('Logout',style: TextStyle(color: Colors.white)),
-                       ],
-                     ),
-                   ),
-                 ),
-               ),
-             ],
-           ),
-         ),
-       ),
-     );
-   }
- }
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Column(
+            children: [
+              // Profile Section
+              Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  Container(
+                    width: screenWidth,
+                    height: screenHeight * 0.25,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Colors.blue.shade600, Colors.green.shade700],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CircleAvatar(
+                          radius: 50,
+                          backgroundColor: Colors.white,
+                          child: Image.asset('assets/images/man.png'),
+                        ),
+                        const SizedBox(height: 8),
+                        const Text(
+                          'David Wilson',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const Text(
+                          'Cleanup Provider',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Positioned(
+                    left: screenWidth * 0.05,
+                    right: screenWidth * 0.05,
+                    bottom: -30,
+                    child: Card(
+                      elevation: 4,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      color: Colors.white,
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            _buildStatColumn('156', 'Completed'),
+                            _buildStatColumn('4.9', 'Rating'),
+                            _buildStatColumn('98%', 'Success'),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              SizedBox(height: 50),
+
+              // Personal Info Card
+              CustomWidgets().buildCard(
+                title: "Personal Information",
+                children: [
+                  CustomWidgets().buildInfoRow(Icons.email_outlined, "Email", "david.wolson@example.com"),
+                  CustomWidgets().buildInfoRow(CupertinoIcons.phone, "Phone", "+1 234 459 580"),
+                  CustomWidgets().buildInfoRow(Icons.location_on_outlined, "Location", "New York, USA"),
+                ],
+              ),
+
+              // Performance Card
+              CustomWidgets().buildCard(
+                title: "Performance",
+                children: [
+                  CustomWidgets().buildPerformanceRow("Response Rate", "98%", Colors.green, 0.98),
+                  CustomWidgets().buildPerformanceRow("Completion Rate", "95%", Colors.blue, 0.95),
+                ],
+              ),
+
+              // Reset Account Button
+              CustomWidgets().buildButtonCard(CupertinoIcons.delete, "Reset Account", Colors.grey[300]),
+
+              // Logout Button
+              CustomWidgets().buildButtonCard(Icons.logout, "Logout", Colors.red, textColor: Colors.white),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStatColumn(String value, String label) {
+    return Column(
+      children: [
+        Text(
+          value,
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.blue.shade700,
+          ),
+        ),
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
+            color: Colors.grey,
+          ),
+        ),
+      ],
+    );
+  }
+}

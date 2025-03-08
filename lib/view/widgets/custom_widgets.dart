@@ -95,8 +95,7 @@ class CustomWidgets {
 
   // Navigation Widget
 
-  Widget
-  BottomNavigation(BuildContext context) {
+  Widget BottomNavigation(BuildContext context) {
     return CurvedNavigationBar(
       backgroundColor: Colors.blue.shade100,
       color: AppColor.appBarColor,
@@ -121,6 +120,144 @@ class CustomWidgets {
       ],
     );
   }
+
+  Widget buildCard({required String title, required List<Widget> children}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+      child: Card(
+        elevation: 2,
+        color: AppColor.appWhiteColor,
+        child: Padding(
+          padding: const EdgeInsets.all(11.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(title,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              SizedBox(height: 11),
+              ...children,
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Helper method for Info Rows
+  Widget buildInfoRow(IconData icon, String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        children: [
+          Icon(icon, size: 18),
+          SizedBox(width: 10),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(label,
+                  style: TextStyle(
+                      fontSize: 14,
+                      color: AppColor.grayTextColor,
+                      fontWeight: FontWeight.w700)),
+              Text(value,
+                  style: TextStyle(
+                      fontSize: 14,
+
+                      color: AppColor.appBlackColor,
+
+                      fontWeight: FontWeight.w500)),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Helper method for Buttons
+  Widget buildButtonCard(IconData icon, String text, Color? bgColor,
+      {Color textColor = Colors.black}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+      child: Card(
+        elevation: 1,
+        color: bgColor,
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, color: textColor),
+              SizedBox(width: 5),
+              Text(text, style: TextStyle(color: textColor)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Helper method for Performance Rows
+  Widget buildPerformanceRow(
+      String title, String value, Color color, double progress) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(title, style: TextStyle(fontSize: 13)),
+              Text(value, style: TextStyle(fontSize: 13)),
+            ],
+          ),
+          SizedBox(height: 4),
+          SizedBox(
+            height: 6,
+            child: LinearProgressIndicator(
+              borderRadius: BorderRadius.circular(12),
+              value: progress,
+              backgroundColor: Colors.grey[300],
+              valueColor: AlwaysStoppedAnimation<Color>(color),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
-// Navigation Widget
+// Reusable Input Card for TextField
+Widget buildInputCard({
+
+  required IconData icon,
+  required String hintText,
+  required String labelText,
+  bool isPassword = false,
+  required TextEditingController controller,
+}) {
+  return Card(
+    elevation: 4,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(20),
+    ),
+    child: TextField(
+      controller: controller,
+      obscureText: isPassword,
+      decoration: InputDecoration(
+        prefixIcon: Icon(icon, color: AppColor.appBarColor),
+        hintText: hintText,
+        labelText: labelText,
+        labelStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Colors.green, width: 1.5),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: AppColor.appBarColor, width: 2),
+        ),
+      ),
+    ),
+  );
+}

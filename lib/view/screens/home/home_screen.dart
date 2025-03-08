@@ -92,7 +92,7 @@ class HomeScreen extends StatelessWidget {
                 Text(
                   'Recent Requests',
                   style: TextStyle(
-                      color: AppColor.blackColor,
+                      color: AppColor.appBlackColor,
                       fontSize: 18,
                       fontWeight: FontWeight.bold),
                 ),
