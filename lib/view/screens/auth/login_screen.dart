@@ -1,0 +1,132 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:smart_clean_admin/constants/app_color.dart';
+import 'package:smart_clean_admin/view/screens/auth/auth_controller.dart';
+import 'package:smart_clean_admin/view/screens/dashboard/dashboard_screen.dart';
+import 'package:smart_clean_admin/view/widgets/custom_widgets.dart';
+
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    double screenHeight = MediaQuery
+        .of(context)
+        .size
+        .height;
+
+    return GetBuilder<AuthController>(builder: (ctrl) {
+      return Scaffold(
+        body: Column(
+          children: [
+            SizedBox(height: screenHeight * 0.13),
+            Image.asset('assets/images/admin_logo.png'),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20, vertical: 20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(height: screenHeight * 0.04),
+
+                    // Email Field
+                    buildInputCard(
+                      icon: Icons.email_outlined,
+                      hintText: 'Enter your email',
+                      labelText: 'Email', controller: ctrl.emailController,
+                    ),
+
+                    SizedBox(height: screenHeight * 0.01),
+
+                    // Password Field + Forgot Password
+                    Stack(
+                      alignment: Alignment.centerRight,
+                      children: [
+                        buildInputCard(
+                          icon: Icons.lock_outline,
+                          hintText: 'Enter your password',
+                          labelText: 'Password',
+                          isPassword: true, controller: ctrl.passwordController,
+                        ),
+                        Positioned(
+                          right: 12,
+                          top: 12,
+                          child: TextButton(
+                            onPressed: () {
+                              // Navigate to Forgot Password Screen
+                            },
+                            child: Text(
+                              "Forgot Password?",
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: AppColor.numberHeighlightedColor,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    SizedBox(height: screenHeight * 0.02),
+
+                    // Login Button
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style:
+                        ElevatedButton.styleFrom(
+                          backgroundColor: AppColor.appBarColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          elevation: 5,
+                        ),
+                        onPressed: () {
+                          Get.offAll(() => DashboardScreen());
+                        },
+                        child: Text(
+                          "Login",
+                          style: TextStyle(fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: AppColor.appWhiteColor),
+                        ),
+                      ),
+                    ),
+
+                    SizedBox(height: screenHeight * 0.02),
+
+                    // Already Have an Account? Sign Up
+                    GestureDetector(
+                      onTap: () {
+                        Get.toNamed("/signup");
+                      },
+                      child: Text.rich(
+                        TextSpan(
+                          text: "Don't have an account? ",
+                          style: TextStyle(fontSize: 14, color: Colors.black),
+                          children: [
+
+                            TextSpan(
+                              text: "Sign Up",
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: AppColor.numberHeighlightedColor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    });
+  }
+}
