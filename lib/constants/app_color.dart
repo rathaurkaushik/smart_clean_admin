@@ -8,7 +8,7 @@ class AppColor{
   static const grayTextColor = Color(0xff6b7280);
   static const numberHeighlightedColor = Color(0xff2563eb);
   static const warningColor = Color(0xffea580c);
-  static const blackColor = Color(0xff000000);
+  static const appBlackColor = Color(0xff000000);
   static const simpleTextColor = Color(0xff1f2937);
   static const pendingTextColor = Color(0xffa16207);
   static const pendingBackgroundColor = Color(0xfffef9c3);
