@@ -21,7 +21,7 @@ class SignupScreen extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(height: screenHeight * 0.13),
+                SizedBox(height: screenHeight * 0.03),
                 Image.asset('assets/images/admin_logo.png'),
                 Center(
                   child: Padding(
@@ -30,7 +30,24 @@ class SignupScreen extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(height: screenHeight * 0.04),
+                        SizedBox(height: screenHeight * 0.01),
+
+                        buildInputCard(
+                          icon: Icons.person_outline,
+                          hintText: 'Enter your name',
+                          labelText: 'Name', controller: ctrl.nameController,
+                        ),
+                        SizedBox(height: screenHeight * 0.01),
+
+
+                        buildInputCardWithCountryCode(
+
+                          hintText: 'Enter your phone number',
+                          labelText: 'Number', controller: ctrl.numberController,
+                        ),
+
+
+                        SizedBox(height: screenHeight * 0.01),
 
                         // Email Field
                         buildInputCard(
@@ -48,6 +65,8 @@ class SignupScreen extends StatelessWidget {
                           labelText: 'Password',
                           isPassword: true, controller: ctrl.passwordController,
                         ),
+                        SizedBox(height: screenHeight * 0.01),
+
                         buildInputCard(
                           icon: Icons.lock_outline,
                           hintText: 'Confirm password',
