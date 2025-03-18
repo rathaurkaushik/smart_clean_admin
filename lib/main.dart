@@ -8,17 +8,25 @@ import 'package:smart_clean_admin/view/screens/auth/auth_controller.dart';
 import 'package:smart_clean_admin/view/screens/auth/login_screen.dart';
 import 'package:smart_clean_admin/view/screens/auth/signup_screen.dart';
 import 'package:smart_clean_admin/view/screens/dashboard/dashboard_binding.dart';
+import 'package:smart_clean_admin/view/screens/dashboard/dashboard_controller.dart';
 import 'package:smart_clean_admin/view/screens/dashboard/dashboard_screen.dart';
+import 'package:smart_clean_admin/view/screens/home/home_binding.dart';
 import 'package:smart_clean_admin/view/screens/home/home_controller.dart';
 import 'package:smart_clean_admin/view/screens/home/home_screen.dart';
 import 'package:smart_clean_admin/view/screens/profile/profile_screen.dart';
+import 'package:smart_clean_admin/view/screens/request/request_binding.dart';
+import 'package:smart_clean_admin/view/screens/request/request_controller.dart';
+
 import 'package:smart_clean_admin/view/screens/request/request_screen.dart';
 import 'package:smart_clean_admin/view/screens/setting/setting_screen.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: firebaseOptions);
   Get.put(HomeController());
+  Get.put(RequestController());
+  Get.put(AuthController());
+  Get.put(DashboardController());
   runApp(MyApp());
 }
 
@@ -29,50 +37,45 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isLogggedIn = FirebaseAuth.instance.currentUser != null;
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      initialRoute: isLogggedIn ? "/" : "/signup",
-      initialBinding: DashboardBinding(),
-      getPages: [
 
-        GetPage(
-          name: "/",
-          page: () => DashboardScreen(),
-          binding: DashboardBinding()
+    return GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
         ),
-        GetPage(
+        initialRoute: isLogggedIn ? "/" : "/signup",
+        initialBinding: DashboardBinding(),
+        getPages: [
+          GetPage(
+              name: "/",
+              page: () => DashboardScreen(),
+              binding: DashboardBinding()),
+          GetPage(
             name: "/login",
             page: () => LoginScreen(),
-        ),
-        GetPage(
+          ),
+          GetPage(
             name: "/signup",
             page: () => SignupScreen(),
-          binding: AuthBinding(),
-
-        ),
-        GetPage(
-          name: "/home",
-          page: () => HomeScreen(),
-        ),
-        GetPage(
-          name: "/profile",
-          page: () => ProfileScreen(),
-        ),
-        GetPage(
-          name: "/request",
-          page: () => RequestScreen(),
-        ),
-        GetPage(
-          name: "/setting",
-          page: () => SettingScreen(),
-        )
-      ]
-    );
+            binding: AuthBinding(),
+          ),
+          GetPage(
+              name: "/home", page: () => HomeScreen(), binding: HomeBinding()),
+          GetPage(
+            name: "/profile",
+            page: () => ProfileScreen(),
+          ),
+          GetPage(
+              name: "/request",
+              page: () => RequestScreen(),
+              binding: RequestBinding()),
+          GetPage(
+            name: "/setting",
+            page: () => SettingScreen(),
+          )
+        ]);
   }
 }
