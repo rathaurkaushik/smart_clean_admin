@@ -1,9 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import 'package:smart_clean_admin/utils/toast_maasage.dart';
 import 'package:smart_clean_admin/view/screens/dashboard/dashboard_screen.dart';
-import 'package:smart_clean_admin/view/screens/home/home_controller.dart';
-import 'package:smart_clean_admin/view/screens/home/home_screen.dart';
 
 class AuthController extends GetxController {
   // Firebase instance
@@ -13,7 +14,11 @@ class AuthController extends GetxController {
   // Controllers for text fields
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController numberController =
+  TextEditingController();
 
   // Reactive variable to track loading state
   var isLoading = false.obs;
@@ -23,39 +28,91 @@ class AuthController extends GetxController {
     emailController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
+    nameController.dispose();
+    numberController.dispose();
     super.dispose();
   }
 
   // Sign-up function with validation and error handling
   Future<void> signUp() async {
-    if(!formKey.currentState!.validate()){
+    if (!formKey.currentState!.validate()) {
       return;
     }
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
     String confirmPassword = confirmPasswordController.text.trim();
+    String name = nameController.text.trim();
+    String number = numberController.text.trim();
 
-    if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
-      Get.snackbar("Error", "All fields are required");
+    if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty || name.isEmpty || number.isEmpty) {
+      Utils().toastMessageWarning("All fields are required");
       return;
     }
 
     if (password != confirmPassword) {
-      Get.snackbar("Error", "Passwords do not match");
+      Utils().toastMessageWarning("Passwords do not match");
       return;
-    }
-    else {
+    } else {
       try {
         isLoading.value = true; // Show loading indicator
-        await _auth.createUserWithEmailAndPassword(
+       UserCredential userCredential =  await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
-        Get.snackbar("Success", "Account created successfully!");
+       User? user = userCredential.user;
+
+       // add name and phone number
+      if(user!= null){
+          // Add user details in firebase
+
+        await FirebaseFirestore.instance.collection('users').doc(user.uid).set(
+            {
+              'name' : name,
+              'number' : number,
+              'email': email,
+              'uid' : user.uid
+
+            });
+
+      }
+
+        Utils().toastMessageSimple("Account created successfully!");
         // Navigate to another screen after successful signup
-        Get.offAll(() => DashboardScreen()); // Uncomment when you have a HomeScreen
+        Get.offAllNamed("/");// Uncomment when you have a HomeScreen
+        isLoading.value = false;
       } catch (e) {
-        Get.snackbar("Sign Up Failed", e.toString());
+        Utils().toastMessageWarning('Sign Up Failed' + e.toString());
+        isLoading.value = false;
       } finally {
         isLoading.value = false; // Hide loading indicator
+
+      }
+    }
+  }
+
+  Future<void> login() async {
+    if (!formKey.currentState!.validate()) {
+      return;
+    }
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
+
+    if (email.isEmpty || password.isEmpty) {
+      Utils().toastMessageWarning('All fields are required');
+      isLoading.value = false;
+      return;
+    } else {
+      try {
+        isLoading.value = true;
+        UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+            email: email, password: password);
+        Utils().toastMessageSimple("Login Successfully");
+
+        Get.offAllNamed("/");
+
+      } catch (e) {
+        Utils().toastMessageWarning(e.toString());
+
+      }finally{
+        isLoading.value = false;
       }
     }
   }
