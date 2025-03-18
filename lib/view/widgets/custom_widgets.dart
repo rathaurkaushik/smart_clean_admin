@@ -1,3 +1,4 @@
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -260,4 +261,53 @@ Widget buildInputCard({
       ),
     ),
   );
+}
+
+// country code
+
+Widget buildInputCardWithCountryCode({
+
+  required String hintText,
+  required String labelText,
+  required TextEditingController controller,
+}) {
+  return Card(
+    elevation: 4,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(20),
+    ),
+    child: Row(
+      children: [
+        CountryCodePicker(
+          onChanged: (country) {
+            print("Selected country: ${country.dialCode}");
+          },
+          initialSelection: 'IN', // Default to India (change as needed)
+          favorite: ['+91', 'US'],
+          showFlag: false,
+        ),
+        SizedBox(width: 10), // Add space between picker and text field
+        Expanded(
+          child: TextField(
+            controller: controller,
+
+            decoration: InputDecoration(
+              hintText: hintText,
+              labelText: labelText,
+              labelStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(15),
+                borderSide: BorderSide(color: Colors.green, width: 1.5),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(15),
+                borderSide: BorderSide(color: AppColor.appBarColor, width: 2),
+              ),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+
 }
