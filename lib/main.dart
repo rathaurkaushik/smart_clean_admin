@@ -10,6 +10,11 @@ import 'package:smart_clean_admin/view/screens/profile/profile_screen.dart';
 import 'package:smart_clean_admin/view/screens/request/request_screen.dart';
 import 'package:smart_clean_admin/view/screens/setting/setting_screen.dart';
 
+import 'view/screens/user_panel/location_tracking_screen.dart';
+import 'view/screens/user_panel/user_home_screen.dart';
+import 'view/screens/user_panel/waste_collection_status_screen.dart';
+import 'view/screens/user_panel/waste_verification_screen.dart';
+
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: firebaseOptions);
@@ -26,6 +31,10 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+      // home: UserHomeScreen(),
+      //   home: WasteVerificationScreen(),
+      //   home: LocationTrackingScreen(),
+        home: WasteCollectionStatusScreen(),
       theme: ThemeData(
         primarySwatch: Colors.blue,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
