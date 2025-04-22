@@ -32,7 +32,6 @@ class LoginScreen extends StatelessWidget {
                       buildInputCard(
                         icon: Icons.email_outlined,
                         hintText: 'Enter your email',
-                        labelText: 'Email',
                         controller: ctrl.emailController,
                       ),
           
@@ -45,7 +44,6 @@ class LoginScreen extends StatelessWidget {
                           buildInputCard(
                             icon: Icons.lock_outline,
                             hintText: 'Enter your password',
-                            labelText: 'Password',
                             isPassword: true,
                             controller: ctrl.passwordController,
                           ),

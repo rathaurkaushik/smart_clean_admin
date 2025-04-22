@@ -27,7 +27,7 @@ class HomeController extends GetxController {
       print("Documents Found: ${requestsSnapshot.docs.length}");
 
       final List<Request> retrivedRequests = requestsSnapshot.docs
-          .map((doc) => Request.fromJson(doc.data() as Map<String, dynamic>))
+          .map((doc) => Request.fromJson(doc.data() as Map<String, dynamic>, doc.id))
           .toList();
 
       requestList.clear();
@@ -49,10 +49,7 @@ class HomeController extends GetxController {
 
   // help functions with small task
   // make capital letter
-  String capitalize(String text) {
-    if (text.isEmpty) return text;
-    return text[0].toUpperCase() + text.substring(1).toLowerCase();
-  }
+
 
   // Status text color change
   Color getStatusTextColor(String? status) {

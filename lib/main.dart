@@ -13,7 +13,10 @@ import 'package:smart_clean_admin/view/screens/dashboard/dashboard_screen.dart';
 import 'package:smart_clean_admin/view/screens/home/home_binding.dart';
 import 'package:smart_clean_admin/view/screens/home/home_controller.dart';
 import 'package:smart_clean_admin/view/screens/home/home_screen.dart';
+import 'package:smart_clean_admin/view/screens/profile/profile_binding.dart';
+import 'package:smart_clean_admin/view/screens/profile/profile_controller.dart';
 import 'package:smart_clean_admin/view/screens/profile/profile_screen.dart';
+import 'package:smart_clean_admin/view/screens/profile/resetAccount.dart';
 import 'package:smart_clean_admin/view/screens/request/request_binding.dart';
 import 'package:smart_clean_admin/view/screens/request/request_controller.dart';
 
@@ -25,6 +28,7 @@ void main() async {
   await Firebase.initializeApp(options: firebaseOptions);
   Get.put(HomeController());
   Get.put(RequestController());
+  Get.put(ProfileController());
   Get.put(AuthController());
   Get.put(DashboardController());
   runApp(MyApp());
@@ -36,7 +40,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final isLogggedIn = FirebaseAuth.instance.currentUser != null;
+    final isLoggedIn = FirebaseAuth.instance.currentUser != null;
 
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,
@@ -46,7 +50,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        initialRoute: isLogggedIn ? "/" : "/signup",
+        initialRoute: isLoggedIn ? "/" : "/signup",
         initialBinding: DashboardBinding(),
         getPages: [
           GetPage(
@@ -67,6 +71,7 @@ class MyApp extends StatelessWidget {
           GetPage(
             name: "/profile",
             page: () => ProfileScreen(),
+            binding: ProfileBinding(),
           ),
           GetPage(
               name: "/request",
@@ -75,7 +80,11 @@ class MyApp extends StatelessWidget {
           GetPage(
             name: "/setting",
             page: () => SettingScreen(),
-          )
+          ),
+          GetPage(
+            name: "/resetAccount",
+            page: () => ResetAccount(),
+          ),
         ]);
   }
 }

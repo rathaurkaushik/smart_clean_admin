@@ -16,6 +16,7 @@ class AppColor{
   static const acceptBackgroundColor = Color(0xffdcfce7);
   static const completedTextColor = Color(0xff374151);
   static const completeBackgroundColor = Color(0xfff3f4f6);
+  static const userLocation = Color(0xffff6ff);
 
 
 

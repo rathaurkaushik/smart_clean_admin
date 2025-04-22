@@ -50,7 +50,7 @@ class AuthController extends GetxController {
     }
 
     if (password != confirmPassword) {
-      Utils().toastMessageWarning("Passwords do not match");
+      Utils().toastMessageWarning("Passwords does not match");
       return;
     } else {
       try {

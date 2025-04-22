@@ -32,47 +32,44 @@ class SignupScreen extends StatelessWidget {
                       children: [
                         SizedBox(height: screenHeight * 0.01),
 
-                        buildInputCard(
-                          icon: Icons.person_outline,
-                          hintText: 'Enter your name',
-                          labelText: 'Name', controller: ctrl.nameController,
-                        ),
-                        SizedBox(height: screenHeight * 0.01),
+                          buildInputCard(
+                            icon: Icons.person_outline,
+                            hintText: 'Enter your name',
+                            controller: ctrl.nameController,
+                          ),
+                          SizedBox(height: screenHeight * 0.01),
 
 
-                        buildInputCardWithCountryCode(
+                          buildInputCardWithCountryCode(
+                            hintText: 'Enter your phone number',
+                            controller: ctrl.numberController,
+                          ),
 
-                          hintText: 'Enter your phone number',
-                          labelText: 'Number', controller: ctrl.numberController,
-                        ),
 
+                          SizedBox(height: screenHeight * 0.01),
 
-                        SizedBox(height: screenHeight * 0.01),
+                          // Email Field
+                          buildInputCard(
+                            icon: Icons.email_outlined,
+                            hintText: 'Enter your email',
+                            controller: ctrl.emailController,
+                          ),
 
-                        // Email Field
-                        buildInputCard(
-                          icon: Icons.email_outlined,
-                          hintText: 'Enter your email',
-                          labelText: 'Email', controller: ctrl.emailController,
-                        ),
+                          SizedBox(height: screenHeight * 0.01),
 
-                        SizedBox(height: screenHeight * 0.01),
+                          // Password Field + Forgot Password
+                          buildInputCard(
+                            icon: Icons.lock_outline,
+                            hintText: 'Enter your password',
+                            isPassword: true, controller: ctrl.passwordController,
+                          ),
+                          SizedBox(height: screenHeight * 0.01),
 
-                        // Password Field + Forgot Password
-                        buildInputCard(
-                          icon: Icons.lock_outline,
-                          hintText: 'Enter your password',
-                          labelText: 'Password',
-                          isPassword: true, controller: ctrl.passwordController,
-                        ),
-                        SizedBox(height: screenHeight * 0.01),
-
-                        buildInputCard(
-                          icon: Icons.lock_outline,
-                          hintText: 'Confirm password',
-                          labelText: 'Confirm Password',
-                          isPassword: true, controller: ctrl.confirmPasswordController,
-                        ),
+                          buildInputCard(
+                            icon: Icons.lock_outline,
+                            hintText: 'Confirm password',
+                            isPassword: true, controller: ctrl.confirmPasswordController,
+                          ),
 
                         SizedBox(height: screenHeight * 0.02),
 

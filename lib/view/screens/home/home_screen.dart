@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:smart_clean_admin/constants/app_color.dart';
+import 'package:smart_clean_admin/utils/first_letter.dart';
 import 'package:smart_clean_admin/view/screens/home/home_controller.dart';
 import 'package:intl/intl.dart';
+
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -125,7 +127,7 @@ class HomeScreen extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            '${ctrl.capitalize(ctrl.requestList[index].name.toString())}${ctrl.requestList[index].surname.toString()}',
+                                            '${capitalize(ctrl.requestList[index].name.toString())}${ctrl.requestList[index].surname.toString()}',
                                             style: TextStyle(
                                                 color: AppColor.simpleTextColor,
                                                 fontWeight: FontWeight.w500,

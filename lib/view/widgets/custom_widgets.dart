@@ -1,5 +1,6 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_clean_admin/constants/app_color.dart';
@@ -145,12 +146,20 @@ class CustomWidgets {
   }
 
   // Helper method for Info Rows
-  Widget buildInfoRow(IconData icon, String label, String value) {
+  Widget buildInfoRow(Color iconBackgroundColor,Icon icon, String label, String value) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
       child: Row(
+
         children: [
-          Icon(icon, size: 18),
+          Container(
+            padding: const EdgeInsets.all(4),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25),
+              color: iconBackgroundColor,
+            ),
+            child: icon,
+          ),
           SizedBox(width: 10),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -163,9 +172,7 @@ class CustomWidgets {
               Text(value,
                   style: TextStyle(
                       fontSize: 14,
-
                       color: AppColor.appBlackColor,
-
                       fontWeight: FontWeight.w500)),
             ],
           ),
@@ -174,28 +181,168 @@ class CustomWidgets {
     );
   }
 
-  // Helper method for Buttons
-  Widget buildButtonCard(IconData icon, String text, Color? bgColor,
-      {Color textColor = Colors.black}) {
+  Widget buildNotificationCard(Color iconBackgroundColor, Icon icon, String title,
+      String subtitle, bool isEnabled, VoidCallback? onToggle) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-      child: Card(
-        elevation: 1,
-        color: bgColor,
-        child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
             children: [
-              Icon(icon, color: textColor),
-              SizedBox(width: 5),
-              Text(text, style: TextStyle(color: textColor)),
+              Container(
+                padding: const EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25),
+                  color: iconBackgroundColor,
+                ),
+                child: icon,
+              ),
+              const SizedBox(width: 10),
+              RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: '$title\n',
+                      style: const TextStyle(
+                        fontSize: 15,
+                        color: Colors.black,
+                      ),
+                    ),
+                    TextSpan(
+                      text: subtitle,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
+          ),
+          GestureDetector(
+            onTap: onToggle,
+            child: Icon(
+              isEnabled
+                  ? Icons.toggle_on_outlined
+                  : Icons.toggle_off_outlined,
+              size: 30,
+              color: isEnabled ? Colors.blue : Colors.grey,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+
+  /// Help & Support
+  Widget buildHelpSupportCard(
+      Color iconBackgroundColor,
+      Icon icon,
+      String title,
+      ) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25),
+                  color: iconBackgroundColor,
+                ),
+                child: icon,
+              ),
+              const SizedBox(width: 10),
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 15,
+                  color: Colors.black,
+                ),
+              ),
+            ],
+          ),
+          const Icon(
+            CupertinoIcons.right_chevron,
+            color: Colors.grey,
+            size: 20,
+            shadows: [
+              Shadow(color: Colors.grey,offset: Offset.infinite)
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Helper method for Buttons
+  Widget buildButtonCard(
+      BuildContext context,
+      IconData icon,
+      String buttonText,
+      Color? bgColor,
+      String showDialogueTitle,
+      String showDialogueSubtitle,
+      String showDialogueActionButton,
+      VoidCallback onNext,
+      VoidCallback onTap, {
+        Color textColor = Colors.black,
+      })
+
+       {
+    return GestureDetector(
+      onTap: () {
+        showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+            title: Text(showDialogueTitle),
+            content: Text(
+                showDialogueSubtitle),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text("Cancel"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  onNext();
+
+                },
+                child: Text(showDialogueActionButton),
+              ),
+            ],
+          ),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+        child: Card(
+          elevation: 1,
+          color: bgColor,
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(icon, color: textColor),
+                const SizedBox(width: 5),
+                Text(buttonText, style: TextStyle(color: textColor)),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
+
 
   // Helper method for Performance Rows
   Widget buildPerformanceRow(
@@ -230,10 +377,8 @@ class CustomWidgets {
 
 // Reusable Input Card for TextField
 Widget buildInputCard({
-
   required IconData icon,
   required String hintText,
-  required String labelText,
   bool isPassword = false,
   required TextEditingController controller,
 }) {
@@ -248,16 +393,10 @@ Widget buildInputCard({
       decoration: InputDecoration(
         prefixIcon: Icon(icon, color: AppColor.appBarColor),
         hintText: hintText,
-        labelText: labelText,
         labelStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Colors.green, width: 1.5),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: AppColor.appBarColor, width: 2),
-        ),
+        border: InputBorder.none,
+        contentPadding:
+            EdgeInsets.symmetric(vertical: 18), // Controls vertical centering
       ),
     ),
   );
@@ -266,9 +405,7 @@ Widget buildInputCard({
 // country code
 
 Widget buildInputCardWithCountryCode({
-
   required String hintText,
-  required String labelText,
   required TextEditingController controller,
 }) {
   return Card(
@@ -283,31 +420,23 @@ Widget buildInputCardWithCountryCode({
             print("Selected country: ${country.dialCode}");
           },
           initialSelection: 'IN', // Default to India (change as needed)
-          favorite: ['+91', 'US'],
+          favorite: ['+91', 'IN'],
           showFlag: false,
         ),
         SizedBox(width: 10), // Add space between picker and text field
+
         Expanded(
           child: TextField(
             controller: controller,
-
             decoration: InputDecoration(
               hintText: hintText,
-              labelText: labelText,
               labelStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15),
-                borderSide: BorderSide(color: Colors.green, width: 1.5),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15),
-                borderSide: BorderSide(color: AppColor.appBarColor, width: 2),
-              ),
+              border: InputBorder.none,
+              enabledBorder: InputBorder.none,
             ),
           ),
         ),
       ],
     ),
   );
-
 }
