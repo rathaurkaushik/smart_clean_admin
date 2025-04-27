@@ -1,0 +1,2 @@
+D:/projects/smart_clean_admin/android/app/.cxx/Debug/s236b4m2/armeabi-v7a/CMakeFiles/edit_cache.dir
+D:/projects/smart_clean_admin/android/app/.cxx/Debug/s236b4m2/armeabi-v7a/CMakeFiles/rebuild_cache.dir

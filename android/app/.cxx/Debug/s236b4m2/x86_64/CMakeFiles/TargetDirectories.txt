@@ -1,0 +1,2 @@
+D:/projects/smart_clean_admin/android/app/.cxx/Debug/s236b4m2/x86_64/CMakeFiles/edit_cache.dir
+D:/projects/smart_clean_admin/android/app/.cxx/Debug/s236b4m2/x86_64/CMakeFiles/rebuild_cache.dir
