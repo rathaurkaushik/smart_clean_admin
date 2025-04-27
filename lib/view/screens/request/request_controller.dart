@@ -1,4 +1,6 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:smart_clean_admin/model/request_model.dart';
 import 'package:smart_clean_admin/utils/toast_maasage.dart';
@@ -12,8 +14,9 @@ class RequestController extends GetxController {
 
   @override
   void onInit() {
+    requestRef = firestore.collection('requests');
     fetchReqList();  // 👈 Fetch on load
-    requestRef = firestore.collection('requests'); // Just assign collection here
+   // Just assign collection here
     super.onInit();
   }
 
@@ -32,6 +35,61 @@ class RequestController extends GetxController {
     } catch (e) {
       print("Request error: $e");
       Utils().toastMessageWarning(e.toString());
+    }
+  }
+Future<void> deleteRequest(String id) async{
+try{
+    DocumentSnapshot snapshot = await requestRef!.doc(id).get();
+    if(snapshot.exists){
+      await requestRef.doc(id).delete();
+      Utils().toastMessageSimple("Request Rejected");
+    }
+    else {
+      print("id not found");
+    }
+    }
+    catch(e){
+  Utils().toastMessageWarning("Error in id fetch");
+    }
+    finally{
+  Get.back();
+      fetchReqList();
+  update();
+    }
+
+
+}
+  Future<void> submitRequest(String id) async {
+    try {
+      await requestRef.doc(id).update({
+        'status': 'Completed',
+        'submitAt': Timestamp.now(),
+      });
+      fetchReqList(); // refresh list
+      Utils().toastMessageSimple("Request Submitted");
+    } catch (e) {
+      Utils().toastMessageWarning("Failed to submit request: $e");
+    }finally{
+      Get.back();
+      fetchReqList();
+      update();
+    }
+  }
+  Future<void> acceptRequest(String id) async {
+    try {
+      await requestRef.doc(id).update({
+        'status': 'Accepted',
+        'acceptedAt': Timestamp.now(),
+      });
+      Utils().toastMessageSimple("Request Accepted");
+      fetchReqList(); // Refresh list
+    } catch (e) {
+      Utils().toastMessageWarning("Failed to accept request: $e");
+    }
+    finally{
+      Get.back();
+      fetchReqList();
+      update();
     }
   }
 

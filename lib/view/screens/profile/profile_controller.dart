@@ -6,6 +6,9 @@ import 'package:smart_clean_admin/model/users_model.dart';
 import 'package:smart_clean_admin/utils/toast_maasage.dart';
 
 class ProfileController extends GetxController {
+
+
+
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   late CollectionReference? usersCollection;
@@ -19,7 +22,6 @@ class ProfileController extends GetxController {
 
   // list of users
   Rx<UsersModel?> user = Rx<UsersModel?>(null);
-
   @override
   void dispose() {
     // TODO: implement dispose

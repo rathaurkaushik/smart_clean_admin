@@ -9,7 +9,9 @@ import 'package:smart_clean_admin/view/screens/profile/resetAccount.dart';
 import 'package:smart_clean_admin/view/widgets/custom_widgets.dart';
 
 class ProfileScreen extends StatelessWidget {
+
   ProfileScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final ProfileController ctrl = Get.put(ProfileController());
@@ -138,20 +140,20 @@ class ProfileScreen extends StatelessWidget {
                       // toggle logic
                     },
                   ),
-                  CustomWidgets().buildNotificationCard(
-                    Colors.lightGreen[200]!,
-                    Icon(CupertinoIcons.mail, color: Colors.green),
-                    'Summary',
-                    'Daily summary and report',
-                    false,
-
-                    ///on toggle
-                    () {
-                      // toggle logic
-                    },
-                  ),
-                ],
-              ),
+              //     CustomWidgets().buildNotificationCard(
+              //       Colors.lightGreen[200]!,
+              //       Icon(CupertinoIcons.mail, color: Colors.green),
+              //       'Summary',
+              //       'Daily summary and report',
+              //       false,
+              //
+              //       ///on toggle
+              //       () {
+              //         // toggle logic
+              //       },
+              //     ),
+              //   ],
+              // ),
 
               ///  Help and Support
               ///
@@ -194,9 +196,10 @@ class ProfileScreen extends StatelessWidget {
               }, () {}, textColor: Colors.white),
             ],
           ),
+          ]
         ),
       ),
-    );
+    ));
   }
 
   Widget _buildStatColumn(String value, String label) {

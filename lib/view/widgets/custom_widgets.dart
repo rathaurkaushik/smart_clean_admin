@@ -379,28 +379,65 @@ class CustomWidgets {
 Widget buildInputCard({
   required IconData icon,
   required String hintText,
+  IconData? suffixIcon,
   bool isPassword = false,
   required TextEditingController controller,
+  String? Function(String?)? validator,
 }) {
-  return Card(
-    elevation: 4,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(20),
-    ),
-    child: TextField(
-      controller: controller,
-      obscureText: isPassword,
-      decoration: InputDecoration(
-        prefixIcon: Icon(icon, color: AppColor.appBarColor),
-        hintText: hintText,
-        labelStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-        border: InputBorder.none,
-        contentPadding:
-            EdgeInsets.symmetric(vertical: 18), // Controls vertical centering
+  if (isPassword) {
+    // Only create controller if password field
+    final visibilityController = Get.put(InputVisibilityController());
+    return GetBuilder<InputVisibilityController>(
+      builder: (controllerX) {
+        return Card(
+          elevation: 4,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: TextField(
+            controller: controller,
+            obscureText: !controllerX.isPasswordVisible,
+            decoration: InputDecoration(
+              prefixIcon: Icon(icon, color: AppColor.appBarColor),
+              suffixIcon: IconButton(
+                onPressed: controllerX.toggleVisibility,
+                icon: Icon(
+                  controllerX.isPasswordVisible
+                      ? Icons.visibility_outlined
+                      : Icons.visibility_off_outlined,
+                ),
+              ),
+              hintText: hintText,
+              labelStyle:
+              TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.symmetric(vertical: 18),
+            ),
+          ),
+        );
+      },
+    );
+  } else {
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
       ),
-    ),
-  );
+      child: TextField(
+        controller: controller,
+        decoration: InputDecoration(
+          prefixIcon: Icon(icon, color: AppColor.appBarColor),
+          suffixIcon: suffixIcon != null ? Icon(suffixIcon) : null,
+          hintText: hintText,
+          labelStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.symmetric(vertical: 18),
+        ),
+      ),
+    );
+  }
 }
+
 
 // country code
 
@@ -439,4 +476,15 @@ Widget buildInputCardWithCountryCode({
       ],
     ),
   );
+}
+
+///
+/// obscure false
+class InputVisibilityController extends GetxController {
+  bool isPasswordVisible = false;
+
+  void toggleVisibility() {
+    isPasswordVisible = !isPasswordVisible;
+    update();
+  }
 }

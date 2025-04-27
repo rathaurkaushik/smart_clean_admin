@@ -6,6 +6,8 @@ import 'package:smart_clean_admin/constants/app_color.dart';
 import 'package:smart_clean_admin/model/request_model.dart';
 
 class HomeController extends GetxController {
+
+
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   final List<Request> requestList = [];
   late CollectionReference requestCollection;
@@ -13,6 +15,7 @@ class HomeController extends GetxController {
   var pendingCount = 0.obs; // Change to int.obs instead of string.obs
 
   @override
+
   void onInit() {
     super.onInit();
     requestCollection = firestore.collection('requests');
@@ -31,7 +34,7 @@ class HomeController extends GetxController {
           .toList();
 
       requestList.clear();
-      requestList.assignAll(retrivedRequests);
+        requestList.assignAll(retrivedRequests);
 
       // ✅ Count pending requests
       int pending = requestList

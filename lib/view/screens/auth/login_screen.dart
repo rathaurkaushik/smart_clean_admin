@@ -38,29 +38,46 @@ class LoginScreen extends StatelessWidget {
                       SizedBox(height: screenHeight * 0.01),
           
                       // Password Field + Forgot Password
-                      Stack(
-                        alignment: Alignment.centerRight,
+                      buildInputCard(
+                        icon: Icons.lock_outline,
+                        hintText: 'Enter your password',
+                        isPassword: true,
+                        controller: ctrl.passwordController,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          buildInputCard(
-                            icon: Icons.lock_outline,
-                            hintText: 'Enter your password',
-                            isPassword: true,
-                            controller: ctrl.passwordController,
+                          GestureDetector(
+                            onTap: () {
+                              Get.toNamed("/signup");
+                            },
+                            child: Text.rich(
+                              TextSpan(
+                                // text: "Don't have an account? ",
+                                style: TextStyle(fontSize: 14, color: Colors.black),
+                                children: [
+                                  TextSpan(
+                                    text: "Sign Up",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: AppColor.numberHeighlightedColor,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                          Positioned(
-                            right: 12,
-                            top: 12,
-                            child: TextButton(
-                              onPressed: () {
-                                // Navigate to Forgot Password Screen
-                              },
-                              child: Text(
-                                "Forgot Password?",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: AppColor.numberHeighlightedColor,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                          TextButton(
+                            onPressed: () {
+
+                            },
+                            child: Text(
+                              "Forgot Password?",
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: AppColor.numberHeighlightedColor,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                           ),
@@ -71,7 +88,7 @@ class LoginScreen extends StatelessWidget {
           
                       // Login Button
                       Form(
-                        key: ctrl.formKey,
+                        // key: ctrl.formKey,
                         child: SizedBox(
                           width: double.infinity,
                           child:
@@ -111,27 +128,7 @@ class LoginScreen extends StatelessWidget {
                       SizedBox(height: screenHeight * 0.02),
           
                       // Already Have an Account? Sign Up
-                      GestureDetector(
-                        onTap: () {
-                          Get.toNamed("/signup");
-                        },
-                        child: Text.rich(
-                          TextSpan(
-                            text: "Don't have an account? ",
-                            style: TextStyle(fontSize: 14, color: Colors.black),
-                            children: [
-                              TextSpan(
-                                text: "Sign Up",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: AppColor.numberHeighlightedColor,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+
                     ],
                   ),
                 ),

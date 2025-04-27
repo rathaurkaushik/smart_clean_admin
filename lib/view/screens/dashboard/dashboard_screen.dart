@@ -29,26 +29,26 @@ class _DashboardScreenState extends State<DashboardScreen> {
           appBar: AppBar(
             key: _scaffoldKey,
             backgroundColor: AppColor.appBarColor,
-            centerTitle: true,
+            // centerTitle: true,
             title: Text(
-              'Dashboard',
+              'Smart Clean Admin',
               style: TextStyle(
                 color: AppColor.appWhiteColor,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            actions: [
-              IconButton(
-                color: AppColor.appWhiteColor,
-                onPressed: () {},
-                icon: const Icon(Icons.notifications_outlined),
-              ),
-            ],
-            leading: IconButton(
-              color: AppColor.appWhiteColor,
-              onPressed: () => _scaffoldKey.currentState?.openDrawer(),
-              icon: const Icon(Icons.menu_outlined),
-            ),
+            // actions: [
+            //   IconButton(
+            //     color: AppColor.appWhiteColor,
+            //     onPressed: () {},
+            //     icon: const Icon(Icons.notifications_outlined),
+            //   ),
+            // ],
+            // leading: IconButton(
+            //   color: AppColor.appWhiteColor,
+            //   onPressed: () => _scaffoldKey.currentState?.openDrawer(),
+            //   icon: const Icon(Icons.menu_outlined),
+            // ),
           ),
           body: SafeArea(
               child: IndexedStack(
@@ -58,7 +58,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
               RequestScreen(),
               ProfileScreen(),
-              SettingScreen(),
             ],
           )),
           bottomNavigationBar:
@@ -79,7 +78,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn), // Change color
               ),
               Icon(Icons.person, size: 25, color: Colors.white), // Message Icon
-              Icon(Icons.settings, size: 25, color: Colors.white), // Settings Icon
             ],
             onTap: (index) {
               ctrl.changeTabIndex(index); // Change tab index using controller
